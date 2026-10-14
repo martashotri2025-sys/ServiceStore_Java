@@ -1,4 +1,5 @@
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * System demo class demonstrating all workflows and scenarios.
@@ -162,6 +163,39 @@ public class CarServiceDemo {
             System.out.println("[EXPECTED EXCEPTION CAUGHT]: " + ex.getMessage());
             System.out.println("Order status remained unchanged: " + freshOrder.getStatus());
         }
+
+        // --------------------------------------------------------------------
+        // SCENARIO 8: TransportCompany sending buses and taxis to ServiceStore
+        // --------------------------------------------------------------------
+        printHeader("SCENARIO 8: TransportCompany dispatching buses and taxis for repair");
+        final TransportCompany company = new TransportCompany(501L, "Kyiv City Transit", "+380449876543");
+
+        // Populate fleet with buses and taxis (stored in one transport list)
+        company.createBus("BUS-VIN-001", "Mercedes-Benz", "Citaro", 2021);
+        company.createBus("BUS-VIN-002", "MAN", "Lion's City", 2022);
+        company.createBus("BUS-VIN-003", "Solaris", "Urbino 12", 2023);
+
+        company.createTaxi("TAXI-VIN-101", "Toyota", "Camry", 2020);
+        company.createTaxi("TAXI-VIN-102", "Hyundai", "Sonata", 2021);
+        company.createTaxi("TAXI-VIN-103", "Skoda", "Octavia", 2022);
+        company.createTaxi("TAXI-VIN-104", "Toyota", "Prius", 2023);
+
+        System.out.println("Transport company registered: '" + company.getName() + "'");
+        System.out.println("Total transport owned in fleet: " + company.getTransport().size());
+
+        // Dispatch 5 vehicles to ServiceStore using one parameter: amount
+        final int amountToRepair = 5;
+        System.out.println("\nSending transport to ServiceStore with 1 parameter (amount = " + amountToRepair + ")...");
+        final List<Car> vehiclesToRepair = company.sendToServiceStore(amountToRepair);
+
+        System.out.println("[RESULT] Successfully dispatched " + vehiclesToRepair.size() + " vehicles to ServiceStore:");
+        long orderId = 1000L;
+        for (final Car car : vehiclesToRepair) {
+            final ServiceOrder createdOrder = new ServiceOrder(orderId++, car);
+            System.out.println("  - Order #" + createdOrder.getId() + ": "
+                    + car.getMake() + " " + car.getModel() + " (VIN: " + car.getVin() + ") -> Status: " + createdOrder.getStatus());
+        }
+        System.out.println("Total fleet remaining in company: " + company.getTransport().size());
 
         System.out.println("\n======================================================================");
         System.out.println("          ALL SCENARIOS SUCCESSFULLY COMPLETED AND VERIFIED           ");

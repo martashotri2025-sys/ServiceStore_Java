@@ -13,10 +13,6 @@ public class ServiceWork {
     private BigDecimal laborCost;
     private Boolean completed;
 
-    public ServiceWork() {
-        this.completed = false;
-    }
-
     public ServiceWork(
             final String description,
             final BigDecimal partsCost,

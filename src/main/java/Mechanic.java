@@ -1,10 +1,5 @@
 import java.util.Objects;
 
-/**
- * Auto service mechanic.
- * Encapsulates mechanic information and busy status.
- * Mechanic ID is immutable (final).
- */
 public class Mechanic {
 
     private final Long id;
@@ -12,10 +7,6 @@ public class Mechanic {
     private String specialization;
     private Boolean busy;
 
-    public Mechanic() {
-        this.id = null;
-        this.busy = false;
-    }
 
     public Mechanic(
             final Long id,
@@ -58,7 +49,7 @@ public class Mechanic {
         if (specialization == null || specialization.trim().isBlank()) {
             this.specialization = "General";
         } else {
-            this.specialization = specialization.trim();
+            this.specialization = specialization.strip();
         }
     }
 

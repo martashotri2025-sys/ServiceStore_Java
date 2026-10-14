@@ -43,7 +43,6 @@ public class ServiceOrder {
         this.car = car;
     }
 
-    // --- Business Operations ---
 
     /**
      * Adds a work item to the order.
@@ -278,7 +277,7 @@ public class ServiceOrder {
     public String toString() {
         return "ServiceOrder{" +
                 "id=" + id +
-                ", car=" + car.getVin() +
+                ", car=" + (car != null ? car.getVin() : "null") +
                 ", works=" + works.size() +
                 ", mechanic=" + (mechanic != null ? mechanic.getName() : "unassigned") +
                 ", status=" + status +

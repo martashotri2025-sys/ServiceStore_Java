@@ -1,18 +1,21 @@
 public enum OrderStatus {
-    CREATED("Created"),
-    DIAGNOSED("Diagnosed"),
-    APPROVED("Approved"),
-    IN_PROGRESS("In Progress"),
-    COMPLETED("Completed"),
-    CANCELLED("Cancelled");
+    CREATED,
+    DIAGNOSED,
+    APPROVED,
+    IN_PROGRESS,
+    COMPLETED,
+    CANCELLED;
 
-    private final String description;
-
-    OrderStatus(final String description) {
-        this.description = description;
-    }
-
-    public String getDescription() {
-        return description;
+    public static OrderStatus fromValue(final String value) {
+        if (value == null || value.trim().isBlank()) {
+            throw new IllegalArgumentException("Order status value cannot be null or blank.");
+        }
+        final String normalized = value.trim();
+        for (final OrderStatus status : values()) {
+            if (status.name().equalsIgnoreCase(normalized)) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("Unknown order status: " + value);
     }
 }

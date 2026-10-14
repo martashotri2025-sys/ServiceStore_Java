@@ -11,10 +11,6 @@ public class Client {
     private String name;
     private String phone;
 
-    public Client() {
-        this.id = null;
-    }
-
     public Client(final Long id, final String name, final String phone) {
         if (id == null || id <= 0) {
             throw new IllegalArgumentException("Client ID must be a positive number and cannot be null.");

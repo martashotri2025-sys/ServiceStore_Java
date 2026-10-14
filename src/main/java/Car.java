@@ -49,6 +49,16 @@ public class Car {
         setClient(client);
     }
 
+    public Car(
+            final String vin,
+            final String make,
+            final String model,
+            final int year,
+            final Client client
+    ) {
+        this(vin, make, model, Integer.valueOf(year), client);
+    }
+
     public String getVin() {
         return vin;
     }
