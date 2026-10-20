@@ -1,5 +1,8 @@
+package carService.service;
+
 public class CarServiceException extends RuntimeException {
-    public CarServiceException(final String message) {
+
+    public CarServiceException(String message) {
         super(message);
     }
 }
